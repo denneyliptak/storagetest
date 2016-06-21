@@ -1,7 +1,8 @@
 import socket
 import datetime
 import multiprocessing
-import psutil
+import getopt
+import sys
 
 #modified version from: https://gist.github.com/micktwomey/606178
 
@@ -49,11 +50,24 @@ class Server(object):
             self.logger.debug("Started process %r", process)
 
 if __name__ == "__main__":
+
+    # defaults
+    servername = "localhost"
+    port = "9000"
+    options, remainder = getopt.getopt(sys.argv[1:], 'p:t:c:r:s:o', ['server=',
+                                                                     'port=',
+                                                                     ])
+    for opt, arg in options:
+        if opt in ('-s', '--server'):
+            servername = arg
+        elif opt in ('-o', '--port'):
+            port = arg
+
     import logging
     logging.basicConfig(level=logging.INFO)
-    server = Server("localhost", 9000)
+    server = Server(servername, int(port))
     try:
-        logging.info("Listening")
+        logging.info("Listening on port %s" % port)
         server.start()
     except:
         logging.exception("Unexpected exception")
