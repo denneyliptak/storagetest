@@ -142,10 +142,12 @@ if __name__ == '__main__':
     # Constants/arguments:
     MEGA = 1000000
 
-    options, remainder = getopt.getopt(sys.argv[1:], 'p:t:c:r:', ['path=',
+    options, remainder = getopt.getopt(sys.argv[1:], 'p:t:c:r:s:o', ['path=',
                                                           'time=',
                                                           'chunk_size_mb=',
-                                                          'rollover_size_mb',
+                                                          'rollover_size_mb=',
+                                                                     'server=',
+                                                                     'port=',
                                                           ])
     for opt, arg in options:
         if opt in ('-p', '--path'):
@@ -156,6 +158,10 @@ if __name__ == '__main__':
             chunkSizeMB = int(arg)
         elif opt in ('-r', '--rollover_size_mb'):
             maxDataFileSizeMB = int(arg)
+        elif opt in ('-s', '--server'):
+            servername = arg
+        elif opt in ('-o', '--port'):
+            port = int(arg)
 
     print "path\t:", datadir
 
@@ -174,7 +180,7 @@ if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Connect the socket to the port where the server is listening
-    server_address = ('localhost', 6969)
+    server_address = (servername, port)
     # print >>sys.stderr, 'connecting to %s port %s' % server_address
     sock.connect(server_address)
 

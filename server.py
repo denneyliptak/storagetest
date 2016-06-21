@@ -51,7 +51,7 @@ class Server(object):
 if __name__ == "__main__":
     import logging
     logging.basicConfig(level=logging.INFO)
-    server = Server("localhost", 6969)
+    server = Server("localhost", 9000)
     try:
         logging.info("Listening")
         server.start()
