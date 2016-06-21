@@ -16,7 +16,7 @@ where:
   --time: duration of the write test, in seconds
   --chunk_size_mb: size (MB) of chunks written to filesystem
   --rollover_size_mb: size (MB) before data file rolls over
-  --server: hostname (if name resolution is available) or IP or server utility
+  --server: hostname (if name resolution is available) or IP of server utility
   --port: port number for server utility (defaults to 9000)
 ```
 
@@ -24,6 +24,6 @@ where:
 ```
 python server.py ---server localhost --port 9000
 where:
-  --server: hostname (if name resolution is available) or IP or server utility
+  --server: hostname (if name resolution is available) or IP of server utility
   --port: port number for server utility (defaults to 9000)
 ```
